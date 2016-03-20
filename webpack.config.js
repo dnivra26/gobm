@@ -22,7 +22,8 @@ module.exports = {
   plugins: [HTMLWebpackPluginConfig],
   resolve: {
     alias: {
-      components: srcPath + '/components/'
+      components: srcPath + '/components/',
+      parsers: srcPath + '/parsers/'
     }
   }
 };
