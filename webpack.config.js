@@ -1,3 +1,4 @@
+var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
   template: __dirname + '/app/index.html',
@@ -19,10 +20,17 @@ module.exports = {
     filename: 'index_bundle.js',
     path: __dirname + '/dist'
   },
-  plugins: [HTMLWebpackPluginConfig],
+  plugins: [
+    HTMLWebpackPluginConfig,
+    new webpack.ProvidePlugin({
+      'Promise': 'es6-promise',
+      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+    })
+  ],
   resolve: {
     alias: {
       components: srcPath + '/components/',
+      containers: srcPath + '/containers/',
       parsers: srcPath + '/parsers/'
     }
   }
