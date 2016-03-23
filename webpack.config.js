@@ -1,11 +1,9 @@
 var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: __dirname + '/app/index.html',
-  filename: 'index.html',
-  inject: 'body'
-});
+
+var path = require('path');
 var srcPath = __dirname + '/app';
+var port = 2016;
+var publicPath = '/dist/';
 
 module.exports = {
   entry: [
@@ -18,10 +16,21 @@ module.exports = {
   },
   output: {
     filename: 'index_bundle.js',
-    path: __dirname + '/dist'
+    path: path.join(__dirname, '/dist'),
+    publicPath: publicPath
+  },
+  devServer: {
+    contentBase: './app',
+    historyApiFallback: true,
+    hot: true,
+    port: port,
+    publicPath: publicPath,
+    proxy: {
+      "*": "http://localhost:3016"
+    },
+    noInfo: false
   },
   plugins: [
-    HTMLWebpackPluginConfig,
     new webpack.ProvidePlugin({
       'Promise': 'es6-promise',
       'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'

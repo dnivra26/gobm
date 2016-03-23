@@ -4,6 +4,7 @@
   "description": "Build monitor for GO CD",
   "main": "index.js",
   "scripts": {
+    "prestart": "pm2 startOrRestart ecosystem.json",
     "start": "webpack-dev-server --port=2016",
     "lint": "eslint ./app",
     "test": "mocha  --compilers js:babel-core/register test/* -w"
@@ -26,7 +27,6 @@
     "eslint": "^2.4.0",
     "eslint-config-airbnb": "^6.1.0",
     "eslint-plugin-react": "^4.2.3",
-    "html-webpack-plugin": "^2.10.0",
     "lodash": "^4.6.1",
     "mocha": "^2.4.5",
     "webpack": "^1.12.14",
