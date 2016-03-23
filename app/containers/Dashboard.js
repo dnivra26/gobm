@@ -1,23 +1,14 @@
 import React from 'react';
+import parse from 'parsers/DashboardParser';
 
 class Dashboard extends React.Component {
 
     componentDidMount() {
-        const headers = {
-            Accept: 'application/vnd.go.cd.v1+json',
-        };
-        fetch('url',
-            {
-                method: 'get',
-                credentials: 'include',
-                headers: headers,
-                mode: 'no-cors'
-            }
-        ).then(function (resolve, reject) {
-            console.log(resolve);
-            return resolve.text();
-        }).then(function (text){
-            console.log(' text ..........', text);
+        fetch('/api/dashboard').then(function (resolve) {
+            return resolve.json();
+        }).then(function (json){
+            const data = parse(json);
+            console.log('==========>>>>> data', data);
         });
     }
 
