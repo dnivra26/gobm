@@ -4,7 +4,6 @@ import data from './dashboard';
 
 
 describe('Dashboard Parser', () => {
-
   const expectedPipeline1 = { name: 'sphinx-ui', label: '218' };
   const expectedPipeline2 = { name: 'sphinx-functional-test', label: '77' };
 
