@@ -1,54 +1,46 @@
 import React from 'react';
 import parse from 'parsers/DashboardParser';
+import {valueStreamParser, valueStreamMapper} from 'parsers/ValueStreamParser';
 import Pipeline from 'components/Pipeline';
+import _ from 'lodash';
 
-const pdata = {
-  'name': 'Root',
-  'children': [
-    {
-      'name': 'Acre',
-      'children': [
-        {
-          'name': 'Schumm'
-        },
-        {
-          'name': 'Considine'
-        }
-      ]
-    },
-    {
-      'name': 'Minas Gerais',
-      'children': [
-        {
-          'name': 'Lubowitz'
-        },
-        {
-          'name': 'Schmitt'
-        },
-        {
-          'name': 'Oberbrunner'
-        }
-      ]
-    }
-  ]
-};
 
 class Dashboard extends React.Component {
+
+  constructor() {
+    super();
+    this.state = {valueMap: []};
+  }
 
   componentDidMount() {
     fetch('/api/dashboard'
     ).then((resolve) => {
-      console.log('...', resolve);
-      return resolve.text();
+      return resolve.json();
     }).then((text) => {
-      console.log(' text ..........', text);
+      _.each(parse(text), ({ name, label }) => {
+        fetch(`/go/pipelines/value_stream_map/${name}/${label}`)
+          .then((resolve) => {
+            return resolve.json();
+          })
+          .then((finalText) => {
+            const valueStream = valueStreamParser(finalText);
+            let data = this.state.valueMap;
+            data.push(valueStreamMapper(valueStream, name));
+            this.setState({
+              valueMap: data,
+            });
+          });
+      });
+
     });
   }
 
+  getPipelines(valueMap) {
+    return _.map(valueMap, (map) => <Pipeline data={ map }/>);
+  }
+
   render() {
-    return (
-      <Pipeline data={ pdata } />
-    );
+    return (<div>{this.getPipelines(this.state.valueMap)}</div>);
   }
 }
 

@@ -27,6 +27,29 @@ app.get('/api/dashboard', function (req, res) {
   });
 });
 
+app.get('/go/pipelines/value_stream_map/:name/:label', function (req, res) {
+
+  const username = '';
+  const password = '';
+  const domain = '';
+  const name = req.params.name;
+  const label = req.params.label;
+
+  const headers = {
+    Accept: 'application/vnd.go.cd.v1+json',
+    Authorization: `Basic ${new Buffer(`${username}:${password}`).toString('base64')}`,
+  };
+
+  request({
+    headers,
+    uri: `http://${domain}:8153/go/pipelines/value_stream_map/${name}/${label}.json`,
+    method: 'get',
+  }, function (err, response, body) {
+    res.json(JSON.parse(body));
+  });
+});
+
+
 app.get("*", function (req, res) {
   res.render(path.join(__dirname, 'app', 'index.jade'));
 });
