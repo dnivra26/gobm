@@ -32,7 +32,7 @@ module.exports = {
   },
   plugins: [
     new webpack.ProvidePlugin({
-      'Promise': 'es6-promise',
+      'Promise': 'es6-promises',
       'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
     })
   ],
