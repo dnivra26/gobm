@@ -7,11 +7,12 @@ var PORT = 3016;
 
 app.use('/assets', express.static('assets'));
 
-app.get('/api/dashboard', function (req, res) {
 
-  const username = '';
-  const password = '';
-  const domain = '';
+const username = 'prasanna';
+const password = '!abcd1234';
+const domain = '104.40.19.175';
+
+app.get('/api/dashboard', function (req, res) {
 
   const headers = {
     Accept: 'application/vnd.go.cd.v1+json',
@@ -29,9 +30,6 @@ app.get('/api/dashboard', function (req, res) {
 
 app.get('/go/pipelines/value_stream_map/:name/:label', function (req, res) {
 
-  const username = '';
-  const password = '';
-  const domain = '';
   const name = req.params.name;
   const label = req.params.label;
 
