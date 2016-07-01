@@ -8,9 +8,9 @@ var PORT = 3016;
 app.use('/assets', express.static('assets'));
 
 
-const username = 'prasanna';
-const password = '!abcd1234';
-const domain = '104.40.19.175';
+const username = '';
+const password = '';
+const domain = '';
 
 app.get('/api/dashboard', function (req, res) {
 

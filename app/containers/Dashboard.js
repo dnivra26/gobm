@@ -1,7 +1,7 @@
 import React from 'react';
 import parse from 'parsers/DashboardParser';
 import { valueStreamParser, valueStreamMapper } from 'parsers/ValueStreamParser';
-import Pipeline from 'components/Pipeline';
+import PipelineTree from 'components/PipelineTree';
 import _ from 'lodash';
 
 
@@ -31,7 +31,7 @@ class Dashboard extends React.Component {
       });
   }
   getPipelines(valueMap) {
-    return _.map(valueMap, (map) => <Pipeline data={ map } />);
+    return _.map(valueMap, (map) => <PipelineTree data={ map } />);
   }
 
   render() {

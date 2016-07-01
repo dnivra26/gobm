@@ -1,18 +1,22 @@
 import React, { Component, PropTypes } from 'react';
-import { Tree } from 'react-pathjs-chart';
+import 'styles/App.css';
 
 export default class Pipeline extends Component {
   render() {
     return (
-      <Tree data={ this.props.data } />
+      <div>
+        <div className="boxed">
+          {this.props.name}
+        </div>
+      </div>
     );
   }
 }
 
 Pipeline.propTypes = {
-  data: PropTypes.object.isRequired,
+  name: PropTypes.object.isRequired,
 };
 
 Pipeline.defalutProps = {
-  data: {},
+  name: {},
 };
