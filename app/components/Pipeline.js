@@ -14,7 +14,7 @@ export default class Pipeline extends Component {
 }
 
 Pipeline.propTypes = {
-  name: PropTypes.object.isRequired,
+  name: PropTypes.string.isRequired,
 };
 
 Pipeline.defalutProps = {

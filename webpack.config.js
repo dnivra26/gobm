@@ -9,6 +9,8 @@ module.exports = {
   entry: [
     './app/index.js'
   ],
+  debug: true,
+  devtool: "#inline-source-map",
   module: {
     loaders: [
       {
