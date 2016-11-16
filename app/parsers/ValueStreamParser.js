@@ -14,6 +14,8 @@ export const valueStreamMapper = (valueStream, key, acc = {}) => {
   if (_.isEmpty(valueStream[key]))
     return acc;
 
+  acc['min'] = 1;
+
   acc['children'] = _.map(valueStream[key], (childKey) => {
     return valueStreamMapper(valueStream, childKey);
   });

@@ -8,9 +8,9 @@ var PORT = 3016;
 app.use('/assets', express.static('assets'));
 
 
-const username = 'prasanna';
+const username = 'admin';
 const password = '!abcd1234';
-const domain = '104.40.19.175';
+const domain = 'localhost';
 
 app.get('/api/dashboard', function (req, res) {
 
@@ -21,7 +21,7 @@ app.get('/api/dashboard', function (req, res) {
 
   request({
     headers,
-    uri: `http://${domain}:8153/go/api/dashboard.json`,
+    uri: `http://${domain}:8153/go/api/dashboard`,
     method: 'get',
   }, function (err, response, body) {
     res.json(JSON.parse(body));
