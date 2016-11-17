@@ -4,15 +4,19 @@ var path = require('path');
 var srcPath = __dirname + '/app';
 var port = 2016;
 var publicPath = '/dist/';
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: [
     './app/index.js'
   ],
   module: {
-    loaders: [
-      {test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'}
-    ]
+loaders: [{
+		test: /\.css$/,
+       		loader: 'style!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
+	},
+	{ test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'}
+]
   },
   output: {
     filename: 'index_bundle.js',
@@ -34,12 +38,14 @@ module.exports = {
     new webpack.ProvidePlugin({
       'Promise': 'es6-promises',
       'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
-    })
+    }),
+    new ExtractTextPlugin('style.css', { allChunks: true })
   ],
   resolve: {
     alias: {
       components: srcPath + '/components/',
       containers: srcPath + '/containers/',
+      styles: srcPath + '/styles/',
       parsers: srcPath + '/parsers/'
     }
   }

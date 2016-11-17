@@ -27,7 +27,7 @@ export default class Pipeline extends Component {
     return (
       <div>
 	<hr />
-      	<Tree data={ this.props.data } options={ options }/>
+      	<Tree data={ this.props.data } options={ options } pipelineName={ this.props.pipelineName }/>
       </div>
     );
   }
@@ -35,7 +35,8 @@ export default class Pipeline extends Component {
 
 Pipeline.propTypes = {
   data: PropTypes.object.isRequired,
-  options: PropTypes.object.isRequired
+  options: PropTypes.object.isRequired,
+  pipelineName: PropTypes.string.isRequired
 };
 
 Pipeline.defalutProps = {

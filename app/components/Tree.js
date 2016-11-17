@@ -26,7 +26,6 @@ export default class TreeChart extends React.Component {
         var options = new Options(this.props);
         var that = this;
 
-
         var tree = Tree({
             data: this.props.data,
             children: children,
@@ -42,9 +41,6 @@ export default class TreeChart extends React.Component {
         var fillOpacityStyle = {fillOpacity:this.state.finished?1:0,transition: this.state.finished?'fill-opacity ' + sec + 's':''};
 
         var textStyle = fontAdapt(options.label);
-
-
-
         var r = options.r || 5;
         var nodes = _.map(tree.nodes,function (n,index) {
             var position = "translate(" + n.point[0] + "," + n.point[1] + ")";
@@ -55,14 +51,14 @@ export default class TreeChart extends React.Component {
             };
 
             if (children(n.item).length > 0) {
-                var text = <text style={textStyle} transform="translate(-10,0)" textAnchor="end">{ n.item.name }</text>;
+                var text = <text style={textStyle} x="25" y="25" textAnchor="middle">{ n.item.name }</text>;
             } else {
-                var text = <text style={textStyle} transform="translate(10,0)" textAnchor="start">{ n.item.name }</text>;
+                var text = <text style={textStyle} x="0" y="25" textAnchor="middle">{ n.item.name }</text>;
             }
 
             return (
                 <g key={"tree_" + index} transform={ position }>
-                    <circle  style={fillOpacityStyle} {...colors} r={r} cx="0" cy="0" onClick={ toggle }/>
+		    <rect x="0" y="0" width="50" height="50" fill="white" style={fillOpacityStyle} {...colors} stroke="#FF2626" rx="10" ry="25" strokeWidth="10" />
                     { text }
                 </g>
             )
@@ -73,6 +69,7 @@ export default class TreeChart extends React.Component {
                 <g transform={"translate(" + options.margin.left + "," + options.margin.top + ")"}>
                     { curves }
                     { nodes }
+		    <text>{ this.props.pipelineName}</text>
                 </g>
             </svg>
         )
