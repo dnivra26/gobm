@@ -1,12 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import Tree from 'components/Tree';
+import styles from 'styles/tree.css';
+require('styles/tree.css');
 
 export default class Pipeline extends Component {
   render() {
 
     const options = {
         margin: {top: 20, left: 100, right: 100, bottom: 20},
-        width: 600,
+        width: 500,
         height: 300,
         fill: "#F00",
         stroke: "#3E90F0",
@@ -25,8 +27,7 @@ export default class Pipeline extends Component {
     }
 
     return (
-      <div>
-	<hr />
+      <div className={styles.shadow_box}>
       	<Tree data={ this.props.data } options={ options } pipelineName={ this.props.pipelineName }/>
       </div>
     );

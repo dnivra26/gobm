@@ -43,7 +43,11 @@ export default class TreeChart extends React.Component {
         var textStyle = fontAdapt(options.label);
         var r = options.r || 5;
         var nodes = _.map(tree.nodes,function (n,index) {
-            var position = "translate(" + n.point[0] + "," + n.point[1] + ")";
+	    var xPoint = n.point[0];
+	    if (Number.isNaN(xPoint))
+		xPoint = 100;
+	    var yPoint = n.point[1];
+            var position = "translate(" + xPoint + "," + yPoint + ")";
 
             function toggle() {
                 n.item.collapsed = !n.item.collapsed;
@@ -51,25 +55,26 @@ export default class TreeChart extends React.Component {
             };
 
             if (children(n.item).length > 0) {
-                var text = <text style={textStyle} x="25" y="25" textAnchor="middle">{ n.item.name }</text>;
+                var text = <text style={textStyle} x="25" y="75" textAnchor="middle">{ n.item.name }</text>;
             } else {
-                var text = <text style={textStyle} x="0" y="25" textAnchor="middle">{ n.item.name }</text>;
+                var text = <text style={textStyle} x="0" y="75" textAnchor="middle">{ n.item.name }</text>;
             }
 
             return (
                 <g key={"tree_" + index} transform={ position }>
-		    <rect x="0" y="0" width="50" height="50" fill="white" style={fillOpacityStyle} {...colors} stroke="#FF2626" rx="10" ry="25" strokeWidth="10" />
+		    <rect x="0" y="-15" width="50" height="50" fill="white" style={fillOpacityStyle} {...colors} stroke="#FF2626" rx="10" ry="25" strokeWidth="10" />
                     { text }
                 </g>
             )
         });
 
         return (
-            <svg ref="vivus"  width={options.width} height={options.height}>
-                <g transform={"translate(" + options.margin.left + "," + options.margin.top + ")"}>
+            <svg className="shadow-box" ref="vivus" height={options.height}>
+                <g transform={"translate(" + options.margin.left + "," + options.margin.top + ")"}
+		   >
                     { curves }
                     { nodes }
-		    <text>{ this.props.pipelineName}</text>
+		    <text x="0" y="75">{ this.props.pipelineName}</text>
                 </g>
             </svg>
         )

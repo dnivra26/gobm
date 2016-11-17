@@ -3,6 +3,7 @@ import parse from 'parsers/DashboardParser';
 import { valueStreamParser, valueStreamMapper } from 'parsers/ValueStreamParser';
 import Pipeline from 'components/Pipeline';
 import _ from 'lodash';
+import styles from 'styles/tree.css';
 
 
 class Dashboard extends React.Component {
@@ -31,11 +32,16 @@ class Dashboard extends React.Component {
       });
   }
   getPipelines(valueMap) {
-    return _.map(valueMap, (map) => <Pipeline data={ map } />);
+    return _.map(valueMap, (map) => <Pipeline data={ map } pipelineName={map['name']} />);
   }
 
   render() {
-    return (<div>{this.getPipelines(this.state.valueMap)}</div>);
+    return (
+    <div className={styles.blocked_pipeline}>
+	<div className={styles.blocked_pipeline_header}>Blocked Pipelines</div>
+	{ this.getPipelines(this.state.valueMap) }
+    </div>
+  );
   }
 }
 
