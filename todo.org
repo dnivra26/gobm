@@ -2,7 +2,11 @@
 
 * UI Tasks
   - [ ] Animate the svg
-  - [ ] Add the scale property
+  - [ ] set scale property programmatically
+  - [ ] truncate very big pipeline names to format "text ... text"
+  - [ ] Center align the pipeline
+  - [ ] Apply styling for the Pipeline names
+  - [ ] Reduce the height of the box and display min of 3 broken pipelines
 
 * Server side
   - [ ] Fetch additional properties for the broken build like the user,

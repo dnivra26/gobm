@@ -9,7 +9,7 @@ export default class Pipeline extends Component {
     const options = {
         margin: {top: 20, left: 100, right: 100, bottom: 20},
         width: 500,
-        height: 300,
+        height: 175,
         fill: "#F00",
         stroke: "#3E90F0",
         r: 30,
@@ -28,6 +28,7 @@ export default class Pipeline extends Component {
 
     return (
       <div className={styles.shadow_box}>
+	<div>{ this.props.pipelineName }</div>
       	<Tree data={ this.props.data } options={ options } pipelineName={ this.props.pipelineName }/>
       </div>
     );

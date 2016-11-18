@@ -69,12 +69,11 @@ export default class TreeChart extends React.Component {
         });
 
         return (
-            <svg className="shadow-box" ref="vivus" height={options.height}>
-                <g transform={"translate(" + options.margin.left + "," + options.margin.top + ")"}
+            <svg ref="vivus" height={options.height}>
+                <g transform={"translate(" + options.margin.left + "," + options.margin.top + ") scale(0.7)"}
 		   >
                     { curves }
                     { nodes }
-		    <text x="0" y="75">{ this.props.pipelineName}</text>
                 </g>
             </svg>
         )
